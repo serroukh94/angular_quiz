@@ -29,7 +29,6 @@ import { CategoriesComponent } from './quiz/categories/categories.component';
     LoginComponent,
     RegisterComponent,
     CategoriesComponent,
-
   ],
   imports: [
     BrowserModule,

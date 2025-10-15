@@ -1,5 +1,20 @@
+<div class="filter-container">
+  <form [formGroup]="filterForm" (ngSubmit)="onFilter()" class="filter-form">
+    <div class="filter-input-group">
+      <input 
+        type="text" 
+        formControlName="categoryName" 
+        placeholder="Filtrer par nom de catégorie..."
+        class="filter-input"
+      >
+      <button type="submit" class="filter-btn">Filtrer</button>
+    </div>
+  </form>
+</div>
+
 <ul class="categories_container">
-  <li *ngFor="let category of categories; let j = index">
+
+  <li *ngFor="let category of filteredCategories; let j = index">
     <button
       (click)="setCategoryId(category)"
       [class.categories_container--selected]="getSelectedCategory()?.id === category.id"
