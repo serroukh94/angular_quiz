@@ -15,6 +15,10 @@ export class QuestionComponent implements OnInit {
     return this.quizService.quizContent;
   }
 
+  get categoryName() {
+    return this.quizService.getSelectedCategoryLabel();
+  }
+
   ngOnInit(): void {
     // Le contenu sera chargé par le quiz.component lors du startQuiz()
   }
