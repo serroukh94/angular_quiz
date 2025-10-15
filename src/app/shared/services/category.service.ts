@@ -42,7 +42,11 @@ export class CategoryService {
 
   getSelectedCategoryId(): number | null {
     const category = this.getSelectedCategory();
-    return category ? category.id : null;
+    if (!category) return null;
+    
+    const id = typeof category.id === 'string' ? parseInt(category.id) : category.id;
+    console.log('ID de la catégorie sélectionnée:', id, '(type:', typeof id, ')');
+    return id;
   }
 
   getSelectedCategoryLabel(): string {
