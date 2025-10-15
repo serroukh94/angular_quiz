@@ -1,11 +1,11 @@
 <ul class="categories_container">
   <li *ngFor="let category of categories; let j = index">
     <button
-      (click)="setCategoryId(category.id)"
-      [class.categories_container--selected]="getSelectedCategoryId() === category.id"
+      (click)="setCategoryId(category)"
+      [class.categories_container--selected]="getSelectedCategory()?.id === category.id"
     >
       <span>{{ j + 1 }}</span>Category {{ category?.categoryLabel }}
     </button>
   </li>
-  <button (click)="onConfirmCategory()" *ngIf="getSelectedCategoryId() != null" class="btn">Continuer</button>
+  <button (click)="onConfirmCategory()" *ngIf="getSelectedCategory() != null" class="btn">Continuer</button>
 </ul>

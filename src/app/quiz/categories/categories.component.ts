@@ -1,5 +1,5 @@
-import { Component, Output, EventEmitter } from '@angular/core';
-import { QuizService } from "../../shared/services/quiz.service";
+import { Component, Output, EventEmitter, OnInit } from '@angular/core';
+import { CategoryService, Category } from "../../shared/services/category.service";
 
 @Component({
   selector: 'app-categories',
@@ -7,29 +7,33 @@ import { QuizService } from "../../shared/services/quiz.service";
   templateUrl: './categories.component.html',
   styleUrl: './categories.component.scss'
 })
-export class CategoriesComponent {
-  categories: any[] = this.quizService.categories;
+export class CategoriesComponent implements OnInit {
+  categories: Category[] = [];
+  selectedCategory: Category | null = null;
   
   @Output() categorySelected = new EventEmitter<void>();
 
-  constructor(private quizService: QuizService) { 
+  constructor(private categoryService: CategoryService) { 
     
   }
 
   ngOnInit(): void {
-    this.quizService.getCategories()
+    this.categoryService.getCategories().subscribe((categories: Category[]) => {
+      this.categories = categories;
+    });
   }
 
-  setCategoryId(categoryId: any) {
-    this.quizService.setCategoryId(categoryId);
+  setCategoryId(category: Category) {
+    this.selectedCategory = category;
+    this.categoryService.setSelectedCategory(category);
   }
 
-  getSelectedCategoryId() {
-    return this.quizService.categoryId;
+  getSelectedCategory(): Category | null {
+    return this.selectedCategory;
   }
 
   onConfirmCategory() {
-    if (this.getSelectedCategoryId() != null) {
+    if (this.getSelectedCategory() != null) {
       this.categorySelected.emit();
     }
   }

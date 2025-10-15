@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import { BehaviorSubject } from 'rxjs';
+import { CategoryService } from './category.service';
 
 export enum QuizStep {
   CATEGORY_SELECTION = 'category-selection',
@@ -14,8 +15,6 @@ export enum QuizStep {
 })
 export class QuizService {
   quizContent: any[] = [];
-  categories: any[] = [];
-  categoryId: any = null;
   playerAnswers: {questionId: number; answer: string}[] = [];
   score = 0;
   isQuizFinished = false;
@@ -25,7 +24,10 @@ export class QuizService {
   private currentStepSubject = new BehaviorSubject<QuizStep>(QuizStep.CATEGORY_SELECTION);
   currentStep$ = this.currentStepSubject.asObservable();
 
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient,
+    private categoryService: CategoryService
+  ) { }
 
   setCurrentStep(step: QuizStep) {
     this.currentStepSubject.next(step);
@@ -36,14 +38,15 @@ export class QuizService {
   }
 
   loadQuiz() {
-    if (this.categoryId) {
-      this.getQuizContent(this.categoryId);
+    const categoryId = this.categoryService.getSelectedCategoryId();
+    if (categoryId) {
+      this.getQuizContent(categoryId);
       this.setCurrentStep(QuizStep.QUIZ_STARTED);
     }
   }
 
   resetCategorySelection() {
-    this.categoryId = null;
+    this.categoryService.resetSelectedCategory();
     this.quizContent = [];
     this.playerAnswers = [];
     this.score = 0;
@@ -77,39 +80,16 @@ export class QuizService {
     this.playerAnswers.push({questionId, answer});
   }
 
-  setCategoryId(categoryId: any) {
-    this.categoryId = categoryId;
-  }
-
-  getCategories() {
-    return this.http.get('http://localhost:3000/categories').subscribe((categories: any) => {
-      for (const category of categories) {
-        this.categories.push({
-            id: category.id,
-            categoryLabel: category.categoryLabel
-        });
-      }
-    });
-  }
-
   getQuizContent(categoryId: number) {
     this.quizContent = [];
     
-    console.log('Searching for questions with categoryId:', categoryId);
-    
     this.http.get('http://localhost:3000/questions').subscribe((questions: any) => {
-      console.log('All questions:', questions);
-
       const filteredQuestions = questions.filter((question: any) => {
-        console.log(`Question ${question.id}: categoryId=${question.categoryId}, target=${categoryId}, match=${question.categoryId === categoryId}`);
         return question.categoryId === categoryId;
       });
       
-      console.log('Filtered questions:', filteredQuestions);
-      
       for (const question of filteredQuestions) {
         this.http.get(`http://localhost:3000/answers?questionId=${question.id}`).subscribe((answers: any) => {
-          console.log(`Adding question ${question.id} with answers:`, answers);
           this.quizContent.push({
               id: question.id,
               question: question.questionLabel,
@@ -122,8 +102,7 @@ export class QuizService {
 
   resetQuiz() {
     this.quizContent = [];
-    this.categoryId = null;
-    this.categories = [];
+    this.categoryService.resetSelectedCategory();
     this.playerAnswers = [];
     this.score = 0;
     this.isQuizFinished = false;
@@ -131,10 +110,6 @@ export class QuizService {
   }
 
   getSelectedCategoryLabel(): string {
-    if (this.categoryId) {
-      const category = this.categories.find(cat => cat.id === this.categoryId);
-      return category ? category.categoryLabel : '';
-    }
-    return '';
+    return this.categoryService.getSelectedCategoryLabel();
   }
 }
