@@ -46,7 +46,9 @@ export class QuizService {
     this.categoryId = null;
     this.quizContent = [];
     this.playerAnswers = [];
+    this.score = 0;
     this.isQuizFinished = false;
+    this.setCurrentStep(QuizStep.CATEGORY_SELECTION);
   }
 
   checkAnswers() {
@@ -91,9 +93,23 @@ export class QuizService {
   }
 
   getQuizContent(categoryId: number) {
+    this.quizContent = [];
+    
+    console.log('Searching for questions with categoryId:', categoryId);
+    
     this.http.get('http://localhost:3000/questions').subscribe((questions: any) => {
-      for (const question of questions) {
+      console.log('All questions:', questions);
+
+      const filteredQuestions = questions.filter((question: any) => {
+        console.log(`Question ${question.id}: categoryId=${question.categoryId}, target=${categoryId}, match=${question.categoryId === categoryId}`);
+        return question.categoryId === categoryId;
+      });
+      
+      console.log('Filtered questions:', filteredQuestions);
+      
+      for (const question of filteredQuestions) {
         this.http.get(`http://localhost:3000/answers?questionId=${question.id}`).subscribe((answers: any) => {
+          console.log(`Adding question ${question.id} with answers:`, answers);
           this.quizContent.push({
               id: question.id,
               question: question.questionLabel,

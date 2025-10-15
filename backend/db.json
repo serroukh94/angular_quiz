@@ -2,83 +2,103 @@
   "questions": [
     {
       "id": 1,
-      "questionLabel": "What is a component in Angular?"
+      "questionLabel": "What is a component in Angular?",
+      "categoryId": 1
     },
     {
       "id": 2,
-      "questionLabel": "Explain the purpose of the NgModule in Angular."
+      "questionLabel": "Explain the purpose of the NgModule in Angular.",
+      "categoryId": 1
     },
     {
       "id": 3,
-      "questionLabel": "How do you create a new Angular application?"
+      "questionLabel": "How do you create a new Angular application?",
+      "categoryId": 1
     },
     {
       "id": 4,
-      "questionLabel": "What is data binding in Angular, and what are the different types of data binding?"
+      "questionLabel": "What is data binding in Angular, and what are the different types of data binding?",
+      "categoryId": 1
     },
     {
       "id": 5,
-      "questionLabel": "Explain the difference between {{}} (interpolation) and [property] (property binding) in Angular templates."
+      "questionLabel": "Explain the difference between {{}} (interpolation) and [property] (property binding) in Angular templates.",
+      "categoryId": 1
     },
     {
       "id": 6,
-      "questionLabel": "What is event binding in Angular, and how is it implemented?"
+      "questionLabel": "What is event binding in Angular, and how is it implemented?",
+      "categoryId": 1
     },
     {
       "id": 7,
-      "questionLabel": "What is Angular CLI, and how do you use it to generate components?"
+      "questionLabel": "What is Angular CLI, and how do you use it to generate components?",
+      "categoryId": 1
     },
     {
       "id": 8,
-      "questionLabel": "What is a directive in Angular? Can you name some built-in directives?"
+      "questionLabel": "What is a directive in Angular? Can you name some built-in directives?",
+      "categoryId": 1
     },
     {
       "id": 9,
-      "questionLabel": "Explain the purpose of the Angular router and how to configure routes in an Angular application."
+      "questionLabel": "Explain the purpose of the Angular router and how to configure routes in an Angular application.",
+      "categoryId": 1
     },
     {
       "id": 10,
-      "questionLabel": "What is dependency injection in Angular, and why is it important?"
+      "questionLabel": "What is dependency injection in Angular, and why is it important?",
+      "categoryId": 1
     },
     {
       "id": 11,
-      "questionLabel": "How do you communicate between parent and child components in Angular?"
+      "questionLabel": "How do you communicate between parent and child components in Angular?",
+      "categoryId": 2
     },
     {
       "id": 12,
-      "questionLabel": "What is a service in Angular, and when should you use it?"
+      "questionLabel": "What is a service in Angular, and when should you use it?",
+      "categoryId": 2
     },
     {
       "id": 13,
-      "questionLabel": "What is the purpose of the ngFor directive in Angular?"
+      "questionLabel": "What is the purpose of the ngFor directive in Angular?",
+      "categoryId": 2
     },
     {
       "id": 14,
-      "questionLabel": "Explain the concept of modules in Angular and their role in organizing an application."
+      "questionLabel": "Explain the concept of modules in Angular and their role in organizing an application.",
+      "categoryId": 2
     },
     {
       "id": 15,
-      "questionLabel": "What is Angular CLI's ng serve command used for?"
+      "questionLabel": "What is Angular CLI's ng serve command used for?",
+      "categoryId": 2
     },
     {
       "id": 16,
-      "questionLabel": "What is Angular's two-way data binding, and how does it work?"
+      "questionLabel": "What is Angular's two-way data binding, and how does it work?",
+      "categoryId": 2
     },
     {
       "id": 17,
-      "questionLabel": "What is Angular's trackBy function, and why is it used with ngFor?"
+      "questionLabel": "What is Angular's trackBy function, and why is it used with ngFor?",
+      "categoryId": 2
     },
     {
       "id": 18,
-      "questionLabel": "How can you handle HTTP requests in Angular?"
+      "questionLabel": "How can you handle HTTP requests in Angular?",
+      "categoryId": 2
     },
     {
       "id": 19,
-      "questionLabel": "What are Angular pipes, and can you give some examples of built-in pipes?"
+      "questionLabel": "What are Angular pipes, and can you give some examples of built-in pipes?",
+      "categoryId": 2
     },
     {
       "id": 20,
-      "questionLabel": "Explain the concept of lazy loading in Angular and when it's beneficial."
+      "questionLabel": "Explain the concept of lazy loading in Angular and when it's beneficial.",
+      "categoryId": 2
     }
   ],
   "answers": [
