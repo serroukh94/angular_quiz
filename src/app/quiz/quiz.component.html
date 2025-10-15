@@ -1,13 +1,37 @@
 <section>
   <h2 class="quiz_title">C'est parti {{ playerName }}, soit prêt !</h2>
+  
+  <section class="quiz_questions-list" *ngIf="showCategories">
+    <app-categories (categorySelected)="onCategorySelected()"></app-categories>
+  </section>
+
+  <section class="quiz_preparation" *ngIf="showPreparation">
+    <div class="preparation_content">
+      <h3>Prêt à commencer ?</h3>
+      <p>Tu as sélectionné la catégorie : <strong>{{ getSelectedCategoryLabel() }}</strong></p>
+      <p>Le quiz va commencer dans quelques instants. Es-tu prêt ?</p>
+      
+      <div class="preparation_actions">
+        <button (click)="goBackToCategories()" class="btn--outline">
+          Changer de catégorie
+        </button>
+        <button (click)="startQuiz()" class="btn">
+          Commencer le quiz !
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <section class="quiz_content" *ngIf="showQuiz">
+    <app-question></app-question>
+  </section>
+
   <section class="quiz_reset" *ngIf="isQuizFinished">
     <h3>You can see your answers</h3>
     <button class="btn--outline">Reset</button>
   </section>
-  <section class="quiz_questions-list">
-    <app-question></app-question>
-  </section>
-  <div class="quiz_validation">
+
+  <div class="quiz_validation" *ngIf="showQuiz">
     <button (click)="goToResultPage()" class="btn">Show score</button>
   </div>
 </section>

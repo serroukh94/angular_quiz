@@ -11,6 +11,9 @@ import { QuizService } from "../shared/services/quiz.service";
 export class QuizComponent implements OnInit {
   isQuizFinished = this.quizService.isQuizFinished;
   playerName = '';
+  showCategories = true;
+  showPreparation = false;
+  showQuiz = false;
 
   constructor(
     private quizService: QuizService,
@@ -25,7 +28,31 @@ export class QuizComponent implements OnInit {
     });
   }
 
+  onCategorySelected() {
+    this.showCategories = false;
+    this.showPreparation = true;
+    this.showQuiz = false;
+  }
+
+  startQuiz() {
+    this.showCategories = false;
+    this.showPreparation = false;
+    this.showQuiz = true;
+    this.quizService.loadQuiz();
+  }
+
+  goBackToCategories() {
+    this.showCategories = true;
+    this.showPreparation = false;
+    this.showQuiz = false;
+    this.quizService.resetCategorySelection();
+  }
+
   goToResultPage() {
     this.router.navigate(['/result']);
+  }
+
+  getSelectedCategoryLabel(): string {
+    return this.quizService.getSelectedCategoryLabel();
   }
 }

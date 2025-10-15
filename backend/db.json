@@ -494,5 +494,15 @@
       "username": "toto",
       "password": "toto"
     }
+  ],
+  "categories": [
+    {
+      "id": 1,
+      "categoryLabel": "test1"
+    },
+    {
+      "id": 2,
+      "categoryLabel": "test2"
+    }
   ]
 }
